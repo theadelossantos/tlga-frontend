@@ -1,2 +1,2 @@
 web: node server.js
-web: cd backend && python manage.py runserver 0.0.0.0:$PORT
+web: . venv/bin/activate && pip install -r backend/requirements.txt && python backend/manage.py migrate && python backend/manage.py collectstatic --noinput && gunicorn backend.wsgi --log-file -
