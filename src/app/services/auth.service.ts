@@ -102,37 +102,32 @@ export class AuthService {
     }
     return false;
   }
+  storeTokenInLocalStorage(token: string): void {
+    localStorage.setItem('access', token);
+  }
+
+  getStoredTokenFromLocalStorage(): string | null {
+    return localStorage.getItem('access');
+  }
   
   getCookie(key: string): string | undefined {
     return this.cookieService.get(key);
   }
   
   getUserRoles(): string[] {
-    const accessToken = this.cookieService.get('access');
-    console.log('Access Token:', accessToken);
-
-    if (accessToken) {
-        try {
-          const tokenPayload = accessToken.split('.')[1];
-          console.log('Token Payload:', tokenPayload);
-          const decodedPayload = JSON.parse(atob(tokenPayload));
-          console.log('Decoded Payload:', decodedPayload);
-          ;
-            
-            if (decodedPayload && decodedPayload.roles) {
-                return decodedPayload.roles;
-            } else {
-                console.error('Token payload does not contain roles:', decodedPayload);
-                return [];
-            }
-        } catch (error) {
-            console.error('Error decoding token payload', error);
-            return [];
-        }
+    const tokenPayload = localStorage.getItem('tokenPayload');
+    console.log(tokenPayload)
+  
+    if (tokenPayload) {
+      const decodedPayload = JSON.parse(atob(tokenPayload));
+      
+      if (decodedPayload && decodedPayload.roles) {
+        return decodedPayload.roles;
+      }
     }
+  
     return [];
-}
-
+  }
   
   addStudent(studentData: any): Observable<any> {
     return this.http.post(`${this.api_url}add-student/`, studentData, this.httpOptions).pipe(
