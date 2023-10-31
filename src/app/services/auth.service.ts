@@ -13,7 +13,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class AuthService {
   private csrfToken: string;
-  private api_url: string = 'http://localhost:8000/api/auth/';
+  private api_url: string = 'https://thelipagraceacademy-6412ae26b4d9.herokuapp.com/api/auth/';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
