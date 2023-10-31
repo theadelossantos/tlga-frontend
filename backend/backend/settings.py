@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-+1brdjw4y*sawub6uxt2qye#t91=4bt311lb4=9p_$m793y%h%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://thelipagraceacademy-6412ae26b4d9.herokuapp.com/']
 
 
 # Application definition
@@ -148,7 +148,7 @@ AUTHENTICATION_BACKENDS = (
 AUTH_USER_MODEL = 'database.CustomUser'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
+    "https://thelipagraceacademy-6412ae26b4d9.herokuapp.com/",
 ]
 
 REST_FRAMEWORK = {
