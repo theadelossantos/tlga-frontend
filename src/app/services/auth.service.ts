@@ -102,16 +102,20 @@ export class AuthService {
     }
     return false;
   }
-  storeTokenInLocalStorage(token: string): void {
+  storeAccessTokenInLocalStorage(token: string): void {
     localStorage.setItem('access', token);
   }
 
-  getStoredTokenFromLocalStorage(): string | null {
+  storeRefreshTokenInLocalStorage(token: string): void {
+    localStorage.setItem('refresh', token);
+  }
+
+  getStoredAccessTokenFromLocalStorage(): string | null {
     return localStorage.getItem('access');
   }
-  
-  getCookie(key: string): string | undefined {
-    return this.cookieService.get(key);
+
+  getStoredRefreshTokenFromLocalStorage(): string | null {
+    return localStorage.getItem('refresh');
   }
   
   getUserRoles(): string[] {
