@@ -109,9 +109,11 @@ export class AuthService {
 
     if (accessToken) {
         try {
-            const tokenPayload = accessToken.split('.')[1];
-
-            const decodedPayload = JSON.parse(atob(tokenPayload));
+          const tokenPayload = accessToken.split('.')[1];
+          console.log('Token Payload:', tokenPayload);
+          const decodedPayload = JSON.parse(atob(tokenPayload));
+          console.log('Decoded Payload:', decodedPayload);
+          ;
             
             if (decodedPayload && decodedPayload.roles) {
                 return decodedPayload.roles;
