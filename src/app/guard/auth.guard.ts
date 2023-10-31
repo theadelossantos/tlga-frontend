@@ -25,12 +25,9 @@ export class AuthGuard implements CanActivate {
     // }
 
     const accessToken = this.authService.getStoredAccessTokenFromLocalStorage();
-    const refreshToken = this.authService.getStoredRefreshTokenFromLocalStorage();
+    console.log('accesstoken',accessToken)
     if (accessToken) {
-      // You can also check if the access token is expired here
-      // If expired, consider refreshing the token using the refresh token
-
-      // Access token is valid, check user's roles and permissions
+      // Access token is present, perform role-based authorization check
       const requiredRoles = next.data['roles'] || [];
       const userRoles = this.authService.getUserRoles();
 
@@ -51,13 +48,12 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/admin']);
         return false;
       }
+    } else {
+      // Access token is not present, redirect to login page
+      console.log('AuthGuard: Access denied - Redirecting to login');
+      this.router.navigate(['/login']);
+      return false;
     }
-
-    // If access token doesn't exist, the user is not logged in
-    // You can add further logic here, such as redirecting to the login page
-    console.log('AuthGuard: Access denied - Redirecting to login');
-    this.router.navigate(['/login']);
-    return false;
   }
 
     // const requiredRoles = next.data['roles'] || [];
