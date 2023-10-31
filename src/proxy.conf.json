@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://localhost:8000",
-      "secure": false
+      "target": "https://tlga-backend-cf51a0e64d84.herokuapp.com",
+      "secure": true
     }
   }
