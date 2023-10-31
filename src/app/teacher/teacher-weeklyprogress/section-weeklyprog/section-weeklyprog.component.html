@@ -1,0 +1,135 @@
+<div class="links d-flex">
+    <a class="classes" [routerLink]="['/teacher/weeklyprog']">Classes </a>
+    <p class="next">></p>
+    <a class="active"><b>{{ gradeLevelName}} - {{ sectionName }} - {{subjectName}}</b></a>
+</div>
+<div class="toggle-select-container mb-3">
+  
+</div>
+
+<div class="parent-div">
+  <div class="assessment-div">
+    <div >
+      <select  class="form-select" [(ngModel)]="selectedAssessmentType">
+        <option *ngFor="let type of assessmentTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+<form (submit)="submitForm()">
+  <div class="d-flex flex-row mt-3">
+    <div class="mr-3">
+      <label><b>Highest Possible Score:</b></label>
+      <input class="form-control" type="text" [(ngModel)]="hpsData[selectedAssessmentType]" name="highestPossibleScore" placeholder="Highest Possible Score" required/>
+    </div>
+  
+    <!-- TASK NAME PER ASSESSMENT -->
+    
+    <div class="mr-3">
+      <label><b>Activity Name:</b></label>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 1'" type="text" [(ngModel)]="nameWW1" name="nameWW1" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 2'" type="text" [(ngModel)]="nameWW2" name="nameWW2" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 3'" type="text" [(ngModel)]="nameWW3" name="nameWW3" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 4'" type="text" [(ngModel)]="nameWW4" name="nameWW4" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 5'" type="text" [(ngModel)]="nameWW5" name="nameWW5" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 6'" type="text" [(ngModel)]="nameWW6" name="nameWW6" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 7'" type="text" [(ngModel)]="nameWW7" name="nameWW7" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 8'" type="text" [(ngModel)]="nameWW8" name="nameWW8" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 9'" type="text" [(ngModel)]="nameWW9" name="nameWW9" placeholder="Task Name" required/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Written Work 10'" type="text" [(ngModel)]="nameWW10" name="nameWW10" placeholder="Task Name" required/>
+    
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 1'" type="text" [(ngModel)]="namePT1" name="namePT1" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 2'" type="text" [(ngModel)]="namePT2" name="namePT2" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 3'" type="text" [(ngModel)]="namePT3" name="namePT3" placeholder="Task Name"/>
+      <input class="form-control"  type="text"  *ngIf="selectedAssessmentType === 'Performance Task 4'" type="text" [(ngModel)]="namePT4" name="namePT4" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 5'" type="text" [(ngModel)]="namePT5" name="namePT5" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 6'" type="text" [(ngModel)]="namePT6" name="namePT6" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 7'" type="text" [(ngModel)]="namePT7" name="namePT7" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 8'" type="text" [(ngModel)]="namePT8" name="namePT8" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 9'" type="text" [(ngModel)]="namePT9" name="namePT9" placeholder="Task Name"/>
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Performance Task 10'" type="text" [(ngModel)]="namePT10" name="namePT10" placeholder="Task Name"/>
+    
+      <input class="form-control" type="text"  *ngIf="selectedAssessmentType === 'Quarterly Assessment'" type="text" [(ngModel)]="nameQA" name="nameQA" placeholder="Task Name"/>
+    
+    </div>
+
+    
+  
+    <!-- INPUT DATES PER ASSESSMENT  -->
+    <div>
+      <label><b>Date</b></label>
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 1'" type="date" [(ngModel)]="selectedDateWW1" name="assessmentDateWW1" required/>
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 2'" type="date" [(ngModel)]="selectedDateWW2" name="assessmentDateWW2" required/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 3'" type="date" [(ngModel)]="selectedDateWW3" name="assessmentDateWW3" required/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 4'" type="date" [(ngModel)]="selectedDateWW4" name="assessmentDateWW4" required/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 5'" type="date" [(ngModel)]="selectedDateWW5" name="assessmentDateWW5" required/> 
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 6'" type="date" [(ngModel)]="selectedDateWW6" name="assessmentDateWW6"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 7'" type="date" [(ngModel)]="selectedDateWW7" name="assessmentDateWW7"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 8'" type="date" [(ngModel)]="selectedDateWW8" name="assessmentDateWW8"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 9'" type="date" [(ngModel)]="selectedDateWW9" name="assessmentDateWW9"/> 
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Written Work 10'" type="date" [(ngModel)]="selectedDateWW10" name="assessmentDateWW10"/>  
+    
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 1'" type="date" [(ngModel)]="selectedDatePT1" name="assessmentDatePT1"/>
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 2'" type="date" [(ngModel)]="selectedDatePT2" name="assessmentDatePT2"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 3'" type="date" [(ngModel)]="selectedDatePT3" name="assessmentDatePT3"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 4'" type="date" [(ngModel)]="selectedDatePT4" name="assessmentDatePT4"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 5'" type="date" [(ngModel)]="selectedDatePT5" name="assessmentDatePT5"/> 
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 6'" type="date" [(ngModel)]="selectedDatePT6" name="assessmentDatePT6"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 7'" type="date" [(ngModel)]="selectedDatePT7" name="assessmentDatePT7"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 8'" type="date" [(ngModel)]="selectedDatePT8" name="assessmentDatePT8"/>  
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 9'" type="date" [(ngModel)]="selectedDatePT9" name="assessmentDatePT9"/> 
+      <input class="form-control" *ngIf="selectedAssessmentType === 'Performance Task 10'" type="date" [(ngModel)]="selectedDatePT10" name="assessmentDatePT10"/>
+    
+      <input class="form-control"*ngIf="selectedAssessmentType === 'Quarterly Assessment'" type="date" [(ngModel)]="selectedDateQA" name="assessmentDateQA"/>
+    </div>
+  </div>
+
+ 
+
+<table *ngIf="selectedAssessmentType" class="student-scores mt-4" id="grades-table">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Learners' Names</th>
+        <th>{{ selectedAssessmentType }}</th>
+        <!-- <th>Status</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ student.lname }}, {{ student.fname }}</td>
+        <td>
+          <input class="input-score" type="text" [ngModel]="getStudentScore(student, selectedAssessmentType) " (input)="setStudentScore(student, selectedAssessmentType, $event); updateStatus(student, selectedAssessmentType)" [name]="'studentScores_' + selectedAssessmentType + '_' + student.id"/>
+        </td>
+        <!-- <td>
+          <select class="form-select" [name]="'studentStatus_' + selectedAssessmentType + '_' + student.id" [(ngModel)]="student.status">
+            <option [ngValue]="'Missing'">Missing</option>
+            <option [ngValue]="'Completed'">Completed</option>
+          </select>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary align-items-center mt-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+      <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5v-13Z"/>
+      <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5V16Zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V0ZM9 1h2v4H9V1Z"/>
+    </svg>
+    Save</button>
+</form>
+
+<div class="position-fixed top-0 end-0 p-3">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="showRawScoreAlert">
+    <strong> Raw Score should be equal or less than HPS! </strong>
+  </div>
+</div>
+
+<div class="position-fixed top-0 end-0 p-3">
+  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="saveAlert">
+    <strong> Successfully Saved! </strong>
+    <button type="submit" class="btn-close" (click)="hideAlert()" aria-label="Close"></button>
+  </div>
+</div>

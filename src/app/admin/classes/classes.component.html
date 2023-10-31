@@ -1,0 +1,15 @@
+<div *ngIf="departmentId === '1'">
+    <app-classes-elem></app-classes-elem>
+</div>
+  
+<div *ngIf="departmentId === '2'">
+    <app-classes-hs></app-classes-hs>
+</div>
+  
+<div *ngIf="departmentId === '3'">
+    <app-classes-shs></app-classes-shs>
+</div>
+
+<div *ngIf="departmentId !== '1' && departmentId !== '2' && departmentId !== '3'">
+    <app-classes-elem></app-classes-elem>
+</div>

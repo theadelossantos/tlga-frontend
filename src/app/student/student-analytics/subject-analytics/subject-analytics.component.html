@@ -1,0 +1,40 @@
+
+<div class="links d-flex">
+    <a class="classes" [routerLink]="['/student/analytics']">Analytics </a>
+    <p class="next">></p>
+    <a class="active"><b>{{subjectName}}</b></a>
+    <p class="next">></p>
+    <a class="classes" [routerLink]="['/student/analytics/overall-performance']">Overall Performance </a>
+</div>
+
+<div class="analytics-container d-flex ">
+  <div class="progress-div p-3 mr-3">
+    <div class="text-flex d-flex justify-content-between align-items-center">
+      <p>Activities</p>
+      <p>This Quarter</p>
+    </div>
+    
+    <canvas #rawScoreChart class="rawscore-line" width="1000" height="600"></canvas>
+  
+  </div>
+  <div class="progress-div p-3 w-100">
+    <h5 class="h5-text">Subject Performance</h5>
+    <div class="circle-progress-container">
+      <circle-progress
+      [percent]="convertToPerspectiveGrade(initialGrade)"
+      [radius]="120"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="8"
+      [maxPercent]="100"
+      [outerStrokeColor]="getCircleColor(initialGrade)"
+      [innerStrokeColor]="getInnerCircleColor(initialGrade)"
+      [animation]="true"
+      [animationDuration]="300"
+      [clockwise]="false"
+      [subtitle]="'performance'"
+    ></circle-progress>
+    </div>
+</div>
+
+
+</div>

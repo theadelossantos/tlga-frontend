@@ -1,0 +1,18 @@
+<div class="links d-flex flex-column">
+    <h1 class="header-text">Analytics</h1>
+    <h5>{{gradeLevelName}} - {{sectionName}}</h5>
+
+</div>
+<select class="form-select shadow-none select-opt mb-2" [(ngModel)]="selectedQuarter" name="quarter" (ngModelChange)="onQuarterChange()">
+    <option *ngFor="let quarter of quarters" [value]="quarter.quarter_id">{{quarter.quarter_name}}</option>
+</select>
+
+<div class="honors d-flex justify-content-between mt-4">
+    <div class="average-barchart">
+        <canvas id="barChart" height="250"></canvas>
+    </div>
+    <div class="average-barchart">
+        <canvas id="studentGradesChart" height="250" ></canvas>
+    </div>
+</div>
+
