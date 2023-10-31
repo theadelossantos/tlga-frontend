@@ -103,6 +103,10 @@ export class AuthService {
     return false;
   }
   
+  getCookie(key: string): string | undefined {
+    return this.cookieService.get(key);
+  }
+  
   getUserRoles(): string[] {
     const accessToken = this.cookieService.get('access');
     console.log('Access Token:', accessToken);

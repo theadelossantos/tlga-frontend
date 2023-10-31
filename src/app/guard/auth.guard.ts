@@ -24,6 +24,10 @@ export class AuthGuard implements CanActivate {
     //   return false;
     // }
 
+
+    const cookieValue = this.authService.getCookie('myCookie');
+    console.log('Cookie Value:', cookieValue);
+
     const requiredRoles = next.data['roles'] || [];
     const userRoles = this.authService.getUserRoles();
 
