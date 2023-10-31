@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log('AuthGuard: Checking authentication status...');
-    // console.log('Is Authenticated:', this.authService.isAuthenticated());
+    console.log('Is Authenticated:', this.authService.isAuthenticated());
 
     // if (!this.authService.isAuthenticated()) {
     //   console.log('AuthGuard: Access denied - Redirecting to login');
@@ -24,58 +24,26 @@ export class AuthGuard implements CanActivate {
     //   return false;
     // }
 
-    const accessToken = this.authService.getStoredAccessTokenFromLocalStorage();
-    console.log('accesstoken',accessToken)
-    if (accessToken) {
-      // Access token is present, perform role-based authorization check
-      const requiredRoles = next.data['roles'] || [];
-      const userRoles = this.authService.getUserRoles();
+    const requiredRoles = next.data['roles'] || [];
+    const userRoles = this.authService.getUserRoles();
 
-      console.log('AuthGuard: Allowed Roles:', requiredRoles);
-      console.log('AuthGuard: User Roles:', userRoles);
+    console.log('AuthGuard: Allowed Roles:', requiredRoles);
+    console.log('AuthGuard: User Roles:', userRoles);
 
-      const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
+    const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
 
-      if (hasRequiredRole) {
-        console.log('AuthGuard: Access granted');
-        return true;
-      } else {
-        if (state.url === '/admin') {
-          console.log('AuthGuard: Access granted for /admin route');
-          return true;
-        }
-        console.log('AuthGuard: Access denied - Redirecting to login');
-        this.router.navigate(['/admin']);
-        return false;
-      }
+    if (hasRequiredRole) {
+      console.log('AuthGuard: Access granted');
+      return true;
     } else {
-      // Access token is not present, redirect to login page
+      if (state.url === '/admin') {
+        console.log('AuthGuard: Access granted for /admin route');
+        return true;
+      }
       console.log('AuthGuard: Access denied - Redirecting to login');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin']);
       return false;
     }
   }
-
-    // const requiredRoles = next.data['roles'] || [];
-    // const userRoles = this.authService.getUserRoles();
-
-    // console.log('AuthGuard: Allowed Roles:', requiredRoles);
-    // console.log('AuthGuard: User Roles:', userRoles);
-
-    // const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
-
-    // if (hasRequiredRole) {
-    //   console.log('AuthGuard: Access granted');
-    //   return true;
-    // } else {
-    //   if (state.url === '/admin') {
-    //     console.log('AuthGuard: Access granted for /admin route');
-    //     return true;
-    //   }
-    //   console.log('AuthGuard: Access denied - Redirecting to login');
-    //   this.router.navigate(['/admin']);
-    //   return false;
-    // }
-  }
   
-
+}
