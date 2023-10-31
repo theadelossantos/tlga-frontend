@@ -105,6 +105,7 @@ export class AuthService {
   
   getUserRoles(): string[] {
     const accessToken = this.cookieService.get('access');
+    console.log('Access Token:', accessToken);
 
     if (accessToken) {
         try {
