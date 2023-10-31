@@ -60,8 +60,12 @@ export class AuthService {
     const data = {
       email, password
     };
-
-    return this.http.post(`${this.api_url}admin-login/`, data, this.httpOptions)
+    console.log('Login Request Data:', data);
+    return this.http.post(`${this.api_url}admin-login/`, data, this.httpOptions).pipe(
+      tap(response => {
+        console.log('Login Response:', response);
+      })
+    )
   }
 
   getUserData(): Observable<any> {
