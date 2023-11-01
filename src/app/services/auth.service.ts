@@ -111,7 +111,6 @@ export class AuthService {
   
   getUserRoles(): Observable<any> {
     const access_token = localStorage.getItem('my_access_token');
-    console.log(access_token)
     if (access_token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${access_token}`
@@ -125,7 +124,7 @@ export class AuthService {
         })
       );
     } else {
-      return of([]); // You can return an empty array or handle it as needed
+      return of([]); 
     }
   }
 
@@ -472,6 +471,8 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_roles');
     return this.http.post(`${this.api_url}logout/`, null);
   }
 
