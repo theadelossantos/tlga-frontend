@@ -106,11 +106,9 @@ export class AuthService {
     return false;
   }
   
-  getUserRoles(): Observable<string[]> {
-    return this.http.get<{ roles: string[] }>(`${this.api_url}roles/`).pipe(
-      map(response => response.roles) 
-    );
-}
+  getUserRoles(): Observable<any> {
+    return this.http.get(`${this.api_url}roles/`);
+  }
 
   
   addStudent(studentData: any): Observable<any> {

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('AuthGuard: Checking authentication status...');
-    console.log('Is Authenticated:', this.authService.isAuthenticated());
 
     // if (!this.authService.isAuthenticated()) {
     //   console.log('AuthGuard: Access denied - Redirecting to login');
@@ -27,13 +26,15 @@ export class AuthGuard implements CanActivate {
 
     const requiredRoles = next.data['roles'] || [];
     return this.authService.getUserRoles().pipe(
-      map(userRoles => {
+      map(response => { 
+        console.log('resp',response)
+        const userRoles = response.roles;
         console.log('AuthGuard: Allowed Roles:', requiredRoles);
         console.log('AuthGuard: User Roles:', userRoles);
-        const rolesArray = Array.isArray(userRoles) ? userRoles : [userRoles];
 
-        const hasRequiredRole = requiredRoles.some(role => rolesArray.includes(role));
-        console.log('hasrequiedrole', hasRequiredRole)
+        const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
+        console.log('hasrequiredrole', hasRequiredRole);
+
         if (hasRequiredRole) {
           console.log('AuthGuard: Access granted');
           return true;
@@ -48,7 +49,5 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
-  
   }
-  
 }
