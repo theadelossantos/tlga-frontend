@@ -18,7 +18,6 @@ export class AuthService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${this.getAccessToken()}`,
     }),
     withCredentials: true  };
   
@@ -427,8 +426,19 @@ export class AuthService {
   }
 
   getTeacherProfile(): Observable<any> {
-    return this.http.get(`${this.api_url}teacher-profile/`, this.httpOptions);
+    const access_token = localStorage.getItem('my_access_token');
+    if (access_token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      });
+  
+      return this.http.get(`${this.api_url}teacher-profile/`, { headers });
+    } else {
+      return throwError('Access token not found in localStorage');
+    }
   }
+  
   getAdminProfile(): Observable<any> {
     return this.http.get(`${this.api_url}admin-profile/`, this.httpOptions);
   }
