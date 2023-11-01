@@ -19,9 +19,7 @@ export class AuthService {
       'Content-Type': 'application/json',
       // 'Authorization': `Bearer ${this.getAccessToken()}`,
     }),
-    withCredentials: true,
-    credentials: 'include'
-  };
+    withCredentials: true  };
   
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
    }
@@ -108,31 +106,9 @@ export class AuthService {
     return false;
   }
   
-  getUserRoles(): string[] {
-    const accessToken = this.cookieService.get('access');
+  getUserRoles(): Observable<string[]> {
+    return this.http.get<string[]>('roles/');
 
-    console.log('Access Token:', accessToken);
-
-
-
-    if (accessToken) {
-        try {
-            const tokenPayload = accessToken.split('.')[1];
-
-            const decodedPayload = JSON.parse(atob(tokenPayload));
-            
-            if (decodedPayload && decodedPayload.roles) {
-                return decodedPayload.roles;
-            } else {
-                console.error('Token payload does not contain roles:', decodedPayload);
-                return [];
-            }
-        } catch (error) {
-            console.error('Error decoding token payload', error);
-            return [];
-        }
-    }
-    return [];
 }
 
   

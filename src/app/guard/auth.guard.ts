@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,25 +26,28 @@ export class AuthGuard implements CanActivate {
     // }
 
     const requiredRoles = next.data['roles'] || [];
-    const userRoles = this.authService.getUserRoles();
+    return this.authService.getUserRoles().pipe(
+      map(userRoles => {
+        console.log('AuthGuard: Allowed Roles:', requiredRoles);
+        console.log('AuthGuard: User Roles:', userRoles);
 
-    console.log('AuthGuard: Allowed Roles:', requiredRoles);
-    console.log('AuthGuard: User Roles:', userRoles);
-
-    const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
-
-    if (hasRequiredRole) {
-      console.log('AuthGuard: Access granted');
-      return true;
-    } else {
-      if (state.url === '/admin') {
-        console.log('AuthGuard: Access granted for /admin route');
-        return true;
-      }
-      console.log('AuthGuard: Access denied - Redirecting to login');
-      this.router.navigate(['/admin']);
-      return false;
-    }
+        const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
+        console.log('hasrequiedrole', hasRequiredRole)
+        if (hasRequiredRole) {
+          console.log('AuthGuard: Access granted');
+          return true;
+        } else {
+          if (state.url === '/admin') {
+            console.log('AuthGuard: Access granted for /admin route');
+            return true;
+          }
+          console.log('AuthGuard: Access denied - Redirecting to login');
+          this.router.navigate(['/admin']);
+          return false;
+        }
+      })
+    );
+  
   }
   
 }
