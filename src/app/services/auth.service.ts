@@ -421,8 +421,17 @@ export class AuthService {
     });
   }
   getStudentProfile(): Observable<any> {
-    return this.http.get(`${this.api_url}student-profile/`, this.httpOptions);
-
+    const access_token = localStorage.getItem('my_access_token');
+    if (access_token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      });
+  
+      return this.http.get(`${this.api_url}student-profile/`, { headers });
+    } else {
+      return throwError('Access token not found in localStorage');
+    }
   }
 
   getTeacherProfile(): Observable<any> {
@@ -438,10 +447,21 @@ export class AuthService {
       return throwError('Access token not found in localStorage');
     }
   }
-  
+
   getAdminProfile(): Observable<any> {
-    return this.http.get(`${this.api_url}admin-profile/`, this.httpOptions);
+    const access_token = localStorage.getItem('my_access_token');
+    if (access_token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      });
+  
+      return this.http.get(`${this.api_url}admin-profile/`, { headers });
+    } else {
+      return throwError('Access token not found in localStorage');
+    }
   }
+  
   updateAdminProfile(profileData: any): Observable<any> {
     return this.http.put(`${this.api_url}admin/profile/`, profileData, this.httpOptions);
 }
