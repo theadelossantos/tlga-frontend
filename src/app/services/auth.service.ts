@@ -19,7 +19,8 @@ export class AuthService {
       'Content-Type': 'application/json',
       // 'Authorization': `Bearer ${this.getAccessToken()}`,
     }),
-    withCredentials: true
+    withCredentials: true,
+    credentials: 'include'
   };
   
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
@@ -109,12 +110,9 @@ export class AuthService {
   
   getUserRoles(): string[] {
     const accessToken = this.cookieService.get('access');
-    const csrfToken = this.cookieService.get('csrftoken');
-    const sessionid = this.cookieService.get('sessionid');
 
     console.log('Access Token:', accessToken);
-    console.log('csrf toke', csrfToken )
-    console.log('session', sessionid )
+
 
 
     if (accessToken) {
