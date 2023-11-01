@@ -107,7 +107,7 @@ export class AuthService {
   }
   
   getUserRoles(): Observable<string[]> {
-    return this.http.get<string[]>('roles/');
+    return this.http.get<string[]>(`${this.api_url}roles/`);
 
 }
 
