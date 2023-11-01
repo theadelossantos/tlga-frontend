@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { tap, map } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import { of } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,13 @@ export class AuthService {
       password,
       role
     };
-    return this.http.post(`${this.api_url}login/`, data, this.httpOptions)
+    return this.http.post(`${this.api_url}login/`, data, this.httpOptions).pipe(
+      tap(response => {
+        if (response && response.access) {
+          localStorage.setItem('my_access_token', response.access);
+        }
+      })
+    )
   }
 
 
@@ -59,13 +66,11 @@ export class AuthService {
     const data = {
       email, password
     };
-    console.log('Login Request Data:', data);
     return this.http.post(`${this.api_url}admin-login/`, data, this.httpOptions).pipe(
       tap(response => {
         if (response && response.access) {
           localStorage.setItem('my_access_token', response.access);
         }
-        console.log('Login Response:', response);
       })
     )
   }
