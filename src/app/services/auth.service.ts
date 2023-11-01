@@ -471,8 +471,8 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user_roles');
+    localStorage.removeItem('my_user_roles');
+    localStorage.removeItem('my_access_token');
     return this.http.post(`${this.api_url}logout/`, null);
   }
 
