@@ -107,8 +107,9 @@ export class AuthService {
   }
   
   getUserRoles(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.api_url}roles/`);
-
+    return this.http.get<{ roles: string[] }>(`${this.api_url}roles/`).pipe(
+      map(response => response.roles) 
+    );
 }
 
   
