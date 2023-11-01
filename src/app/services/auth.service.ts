@@ -6,7 +6,7 @@ import { catchError, filter } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { tap, map } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
-
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,9 @@ export class AuthService {
     console.log('Login Request Data:', data);
     return this.http.post(`${this.api_url}admin-login/`, data, this.httpOptions).pipe(
       tap(response => {
+        if (response && response.access) {
+          localStorage.setItem('my_access_token', response.access);
+        }
         console.log('Login Response:', response);
       })
     )
@@ -107,7 +110,23 @@ export class AuthService {
   }
   
   getUserRoles(): Observable<any> {
-    return this.http.get(`${this.api_url}roles/`);
+    const access_token = localStorage.getItem('my_access_token');
+    console.log(access_token)
+    if (access_token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${access_token}`
+      });
+
+      return this.http.get(`${this.api_url}roles/`, { headers }).pipe(
+        tap(response => {
+          if (response && response.roles) {
+            localStorage.setItem('my_user_roles', JSON.stringify(response.roles));
+          }
+        })
+      );
+    } else {
+      return of([]); // You can return an empty array or handle it as needed
+    }
   }
 
   
