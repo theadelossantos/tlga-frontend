@@ -30,8 +30,9 @@ export class AuthGuard implements CanActivate {
       map(userRoles => {
         console.log('AuthGuard: Allowed Roles:', requiredRoles);
         console.log('AuthGuard: User Roles:', userRoles);
+        const rolesArray = Array.isArray(userRoles) ? userRoles : [userRoles];
 
-        const hasRequiredRole = requiredRoles.some(role => userRoles.includes(role));
+        const hasRequiredRole = requiredRoles.some(role => rolesArray.includes(role));
         console.log('hasrequiedrole', hasRequiredRole)
         if (hasRequiredRole) {
           console.log('AuthGuard: Access granted');
