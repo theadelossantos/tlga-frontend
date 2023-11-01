@@ -994,5 +994,16 @@ printTable() {
   window.print();
 }
 
+getRankStatus(quarterlyGrade: number): string {
+  if (quarterlyGrade >= 90 && quarterlyGrade <= 94.99) {
+    return 'With Honor';
+  } else if (quarterlyGrade >= 95 && quarterlyGrade <= 97.99) {
+    return 'With High Honor';
+  } else if (quarterlyGrade >= 98 && quarterlyGrade <= 100) {
+    return 'With Highest Honor';
+  } else {
+    return ''; 
+  }
+}
 
 }
