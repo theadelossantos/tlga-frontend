@@ -421,58 +421,25 @@ export class AuthService {
       'Content-Type': 'application/json',
     });
   }
-  // private getCSRFToken(): string {
-  //   const csrfToken = document.cookie
-  //     .split('; ')
-  //     .find((cookie) => cookie.startsWith('csrftoken='));
-  //   if (csrfToken) {
-  //     return csrfToken.split('=')[1];
-  //   }
-  //   return '';
-  // }
-  // private setAuthHeader(): HttpHeaders {
-  //   const accessToken = this.getAccessToken();
-  //   const csrfToken = this.getCSRFToken(); 
-  //   let headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //   });
-
-  //   if (accessToken) {
-  //     headers = headers.set('Authorization', `Bearer ${accessToken}`);
-  //   }
-
-  //   if (csrfToken) {
-  //     headers = headers.set('X-CSRFToken', csrfToken);
-  //   }
-
-  //   return headers;
-  // }
-
   getStudentProfile(): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.get(`${this.api_url}student-profile/`, { headers: authHeader });
+    return this.http.get(`${this.api_url}student-profile/`, this.httpOptions);
 
   }
 
   getTeacherProfile(): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.get(`${this.api_url}teacher-profile/`, { headers: authHeader });
+    return this.http.get(`${this.api_url}teacher-profile/`, this.httpOptions);
   }
   getAdminProfile(): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.get(`${this.api_url}admin-profile/`, { headers: authHeader });
+    return this.http.get(`${this.api_url}admin-profile/`, this.httpOptions);
   }
   updateAdminProfile(profileData: any): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.put(`${this.api_url}admin/profile/`, profileData, { headers: authHeader });
+    return this.http.put(`${this.api_url}admin/profile/`, profileData, this.httpOptions);
 }
   updateTeacherProfile(profileData: any): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.put(`${this.api_url}teacher/profile/`, profileData, { headers: authHeader });
+    return this.http.put(`${this.api_url}teacher/profile/`, profileData, this.httpOptions);
   }
   updateStudentProfile(profileData: any): Observable<any> {
-    const authHeader = this.setAuthHeader();
-    return this.http.put(`${this.api_url}student/profile/`, profileData, { headers: authHeader });
+    return this.http.put(`${this.api_url}student/profile/`, profileData, this.httpOptions);
   }
 
   logout(): Observable<any> {
@@ -597,8 +564,7 @@ export class AuthService {
     return this.http.delete(`${this.api_url}announcements/${announcementId}/`, this.httpOptions);
   }
   changePassword(password:any) {
-    const authHeader = this.setAuthHeader();
-    return this.http.post(`${this.api_url}change-password/`, password, { headers: authHeader });
+    return this.http.post(`${this.api_url}change-password/`, password,this.httpOptions);
   }
   getAnnouncementbyDept(deptId:any){
     return this.http.get(`${this.api_url}get-announcements/${deptId}/`, this.httpOptions);
