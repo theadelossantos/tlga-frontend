@@ -143,6 +143,16 @@ export class SectionGradesComponent {
       'Health':{wwPercentage: 20,ptPercentage: 60,qaPercentage: 20},
       'Edukasyon sa Pagpapakatao':{wwPercentage: 30,ptPercentage: 50,qaPercentage: 20},
 
+      'Filipino': {wwPercentage: 30, ptPercentage: 50,qaPercentage: 20},
+      'English': {wwPercentage: 30, ptPercentage: 50,qaPercentage: 20}, 
+      
+      'Science': {wwPercentage: 40, ptPercentage: 40,qaPercentage: 20}, 
+      'Edukasyong Pantahan at Pangkabuhayan': {wwPercentage: 20, ptPercentage:60, qaPercentage:20},
+
+      'TLE': {wwPercentage: 20, ptPercentage: 60,qaPercentage: 20},
+      'Home Economics': {wwPercentage: 20, ptPercentage: 60,qaPercentage: 20},
+
+
     };
     this.authService.getSubjectById(this.subjectId).subscribe(
       (subjectData: any) => {
