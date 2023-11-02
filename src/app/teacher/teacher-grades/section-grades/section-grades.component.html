@@ -253,10 +253,10 @@
         </td>
 
         <td><input class="inigrade" type="text" *ngIf="calculateInitialGrade(student) !== 0" [value]="calculateInitialGrade(student)|| ''" readonly (click)="showStudentId(student.id)" /></td>
-        <td [ngStyle]="{ 'background-color': getRank(student.quarterlyGrade) }">
+        <td>
           <input class="quarterly-grade" type="text" *ngIf="student.totalQuarterlyAssessmentWS !== undefined && student.totalQuarterlyAssessmentWS !== null && student.totalWrittenWorkWS !== undefined && student.totalPerfTaskWS !== undefined" [value]="student.quarterlyGrade !== undefined ? student.quarterlyGrade : ''" readonly name="quarterlyGrade"/>
         </td>
-        <td>{{ getRankStatus(student.quarterlyGrade) }}</td>
+        <td [ngStyle]="{ 'background-color': getRank(student.quarterlyGrade) }">{{ getRankStatus(student.quarterlyGrade) }}</td>
 
       </tr>
     </tbody>

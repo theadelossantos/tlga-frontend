@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://tlga-backend-cf51a0e64d84.herokuapp.com",
+      "target": "https://thelipagraceacademy.pythonanywhere.com",
       "secure": true
     }
   }
