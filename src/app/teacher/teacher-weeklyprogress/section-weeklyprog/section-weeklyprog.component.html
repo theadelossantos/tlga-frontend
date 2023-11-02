@@ -3,21 +3,21 @@
     <p class="next">></p>
     <a class="active"><b>{{ gradeLevelName}} - {{ sectionName }} - {{subjectName}}</b></a>
 </div>
-<div class="toggle-select-container mb-3">
-  <!-- <select class="form-select shadow-none select-opt mb-2" [(ngModel)]="selectedQuarter" name="quarter" (ngModelChange)="onQuarterChange()">
-    <option *ngFor="let quarter of quarters" [value]="quarter.quarter_id">{{quarter.quarter_name}}</option>
-  </select> -->
-</div>
 
-<div class="parent-div">
-  <div class="assessment-div">
-    <div >
-      <select  class="form-select" [(ngModel)]="selectedAssessmentType">
-        <option *ngFor="let type of assessmentTypes" [value]="type">{{ type }}</option>
+
+<div class="d-flex justify-content-between">
+  <div class="w-50 mr-3">
+      <select class="form-select" [(ngModel)]="selectedAssessmentType">
+          <option *ngFor="let type of assessmentTypes" [value]="type">{{ type }}</option>
       </select>
-    </div>
+  </div>
+  <div class="w-50">
+      <select class="form-select shadow-none select-opt mb-2" [(ngModel)]="selectedQuarter" name="quarter" (ngModelChange)="onQuarterChange()">
+          <option *ngFor="let quarter of quarters" [value]="quarter.quarter_id">{{quarter.quarter_name}}</option>
+      </select>
   </div>
 </div>
+
 
 
 <form (submit)="submitForm()">
