@@ -390,13 +390,6 @@ export class SectionWeeklyprogComponent {
   onQuarterChange(){
     console.log('Selected Quarter ID:', this.selectedQuarter);
 
-    this.students.forEach((student) => {
-      this.studentExpansionMap[student.id] = false;
-      this.studentTasks[student.id] = [];
-
-      this.getWeeklyProgress(student.id);
-
-    });
 
     if(this.selectedQuarter){
       this.authService.filterStudents(this.deptId, this.gradeLevelId, this.sectionId).subscribe(
@@ -408,8 +401,14 @@ export class SectionWeeklyprogComponent {
           this.students.forEach((student) => {
             this.studentExpansionMap[student.id] = false;
             this.studentTasks[student.id] = [];
+            this.getWeeklyProgress(student.id);
+
           });
           console.log(this.students);
+          this.fetchStudentRawScores();
+          this.fetchHPS();
+          this.fetchAssesssmentNames()
+          this.sortStudents()
       })
     }
   }
