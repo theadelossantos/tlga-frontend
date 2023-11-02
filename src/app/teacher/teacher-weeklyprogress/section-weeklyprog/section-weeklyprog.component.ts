@@ -390,25 +390,32 @@ export class SectionWeeklyprogComponent {
   onQuarterChange(){
     console.log('Selected Quarter ID:', this.selectedQuarter);
 
-
     if(this.selectedQuarter){
       this.authService.filterStudents(this.deptId, this.gradeLevelId, this.sectionId).subscribe(
         (studentsData: any) => {
           this.students = studentsData.students.map((student: Student) => ({
             ...student,
+            totalWrittenWorkRS: 0,
+            totalWrittenWorkWS: 0,
+            totalPerfTaskRS: 0,
+            totalPerfTaskWS: 0,
+            totalQuarterlyAssessmentWS: 0,
+            initialGrade: 0,
+            quarterlyGrade: 0,
+            ww_scores: Array.from({ length: 10 }, () => null),
+            pt_scores: Array.from({ length: 10 }, () => null),
+            qa_scores: 0,
             
           }));
           this.students.forEach((student) => {
-            this.studentExpansionMap[student.id] = false;
             this.studentTasks[student.id] = [];
-            this.getWeeklyProgress(student.id);
-
+            this.fetchStudentRawScores();
+            this.fetchHPS();
+            this.getWeeklyProgress(student)
+            this.fetchAssesssmentNames()
+            this.sortStudents()
           });
           console.log(this.students);
-          this.fetchStudentRawScores();
-          this.fetchHPS();
-          this.fetchAssesssmentNames()
-          this.sortStudents()
       })
     }
   }
