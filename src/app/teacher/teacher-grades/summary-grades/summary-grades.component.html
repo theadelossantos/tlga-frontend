@@ -41,6 +41,8 @@
             <td *ngFor="let subject of subjects ">{{ student[subject.subject_id] || '-' }}</td>
             <!-- <td>mapeh grade</td> -->
             <td [style.background-color]="student.backgroundColor"><b>{{ student.average }}</b></td> 
+            <td [style.background-color]="student.backgroundColor">{{ getRankStatus(student.average) }}</td>
+
         </tr>
     </tbody>
 

@@ -256,7 +256,7 @@
         <td>
           <input class="quarterly-grade" type="text" *ngIf="student.totalQuarterlyAssessmentWS !== undefined && student.totalQuarterlyAssessmentWS !== null && student.totalWrittenWorkWS !== undefined && student.totalPerfTaskWS !== undefined" [value]="student.quarterlyGrade !== undefined ? student.quarterlyGrade : ''" readonly name="quarterlyGrade"/>
         </td>
-        <td [ngStyle]="{ 'background-color': getRank(student.quarterlyGrade) }">{{ getRankStatus(student.quarterlyGrade) }}</td>
+        <!-- <td [ngStyle]="{ 'background-color': getRank(student.quarterlyGrade) }">{{ getRankStatus(student.quarterlyGrade) }}</td> -->
 
       </tr>
     </tbody>

@@ -236,5 +236,16 @@ export class SummaryGradesComponent {
       });
     }
   }
+  getRankStatus(average: number): string {
+    if (average >= 90 && average <= 94.99) {
+      return 'With Honor';
+    } else if (average >= 95 && average <= 97.99) {
+      return 'With High Honor';
+    } else if (average >= 98 && average <= 100) {
+      return 'With Highest Honor';
+    } else {
+      return ''; 
+    }
+  }
 }
 
