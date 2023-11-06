@@ -152,7 +152,6 @@ export class SectionGradesComponent {
       'TLE': {wwPercentage: 20, ptPercentage: 60,qaPercentage: 20},
       'Home Economics': {wwPercentage: 20, ptPercentage: 60,qaPercentage: 20},
 
-
     };
     this.authService.getSubjectById(this.subjectId).subscribe(
       (subjectData: any) => {
