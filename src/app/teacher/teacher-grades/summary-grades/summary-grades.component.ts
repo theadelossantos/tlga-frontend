@@ -180,7 +180,11 @@ export class SummaryGradesComponent {
       return 'greenyellow';
     } else if (average >= 98 && average <= 100) {
       return 'Yellow';
-    } else {
+    } else if(average <= 74){
+      return 'Red';
+    }
+    
+    else {
       return 'transparent';
     }
   }
