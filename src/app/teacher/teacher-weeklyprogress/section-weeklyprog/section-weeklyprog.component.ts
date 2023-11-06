@@ -1090,7 +1090,7 @@ export class SectionWeeklyprogComponent {
       case 'Performance Task 9':
         return student.pt_scores[8] = score;
       case 'Performance Task 10':
-        return student.pt_scores[9];
+        return student.pt_scores[9] = score;
       
       case 'Quarterly Assessment':
         return student.qa_score  = score;
