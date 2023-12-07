@@ -555,24 +555,26 @@ export class TShschoolComponent {
     this.sectionAssignmentError = '';
   }
   
-  deleteTeacher(teacherId:any){
-    console.log('Deleting subject with ID:', teacherId);
+  deleteTeacher(teacherId: any): void {
+    const teacherIndex = this.filteredTeacher.findIndex((s) => s.id === teacherId);
+    const teacher = this.filteredTeacher[teacherIndex];
   
-    const confirmDelete = window.confirm('Are you sure you want to delete this subject?');
-  
-    if (confirmDelete) {
-      console.log('Before API call - subjectId:', teacherId);
+    const confirmToggle = window.confirm(`Are you sure you want to ${teacher.active ? 'deactivate' : 'activate'} this account?`);
+    if (confirmToggle) {
       this.authService.deleteTeacher(teacherId).subscribe(
         (response) => {
-          this.filteredTeacher = this.filteredTeacher.filter((s) => s.id !== teacherId);
+          if (response.message === 'Teacher deactivated successfully' || response.message === 'Teacher activated successfully') {
+            const newStatus = !teacher.active;
+            this.filteredTeacher[teacherIndex].active = !teacher.active;
+            console.log(`Teacher ${newStatus ? 'activated' : 'deactivated'} successfully`);
+          }
         },
         (error) => {
-          console.error('Error deleting subject: ', error);
+          console.error('Error toggling teacher status: ', error);
         }
       );
     }
   }
-
   hideAlert(){
     this.showAlert = false;
   }

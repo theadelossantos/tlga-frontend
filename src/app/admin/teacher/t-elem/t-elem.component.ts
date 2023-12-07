@@ -155,7 +155,7 @@ export class TElemComponent {
       (data) => {
         this.selectedGradeLevel = this.gradelvl.find((level) => level.gradelvl_id === gradelvlId);
         this.filteredTeacher = data.teachers
-
+        console.log(this.filteredTeacher)
 
         if (this.filteredTeacher.length > 0){
           this.selectedTeacher = {
@@ -540,21 +540,30 @@ export class TElemComponent {
   
   
   
-  deleteTeacher(teacherId:any){
+  deleteTeacher(teacherId: any): void {
+    const teacherIndex = this.filteredTeacher.findIndex((s) => s.id === teacherId);
+    const teacher = this.filteredTeacher[teacherIndex];
   
-    const confirmDelete = window.confirm('Are you sure you want to delete this subject?');
-  
-    if (confirmDelete) {
+    const confirmToggle = window.confirm(`Are you sure you want to ${teacher.active ? 'deactivate' : 'activate'} this account?`);
+    if (confirmToggle) {
       this.authService.deleteTeacher(teacherId).subscribe(
         (response) => {
-          this.filteredTeacher = this.filteredTeacher.filter((s) => s.id !== teacherId);
+          if (response.message === 'Teacher deactivated successfully' || response.message === 'Teacher activated successfully') {
+            const newStatus = !teacher.active;
+            this.filteredTeacher[teacherIndex].active = !teacher.active;
+            console.log(`Teacher ${newStatus ? 'activated' : 'deactivated'} successfully`);
+          }
         },
         (error) => {
-          console.error('Error deleting subject: ', error);
+          console.error('Error toggling teacher status: ', error);
         }
       );
     }
   }
+  
+  
+  
+  
 
   hideAlert(){
     this.showAlert = false;

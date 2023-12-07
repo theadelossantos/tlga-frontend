@@ -223,7 +223,8 @@ onSubmit() {
         address: this.ValidationFormUser.value.address,
         phone: this.ValidationFormUser.value.phone,
         gender: this.ValidationFormUser.value.gender,
-        birthdate: formattedBirthdate
+        birthdate: formattedBirthdate,
+        active: 1
       };
 
       this.authService.addTeacher(teacherData).subscribe(
