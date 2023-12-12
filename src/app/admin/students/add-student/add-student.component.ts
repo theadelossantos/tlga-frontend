@@ -37,7 +37,7 @@ export class AddStudentComponent {
   errorMessage:string = '';
   showAlert: boolean = false;
 
-
+  lrn : string = "";
   fname : string = "";
   mname : string = "";
   lname : string = "";
@@ -51,6 +51,7 @@ export class AddStudentComponent {
   email : string = "";
   password : string = "";
   validationMessages = {
+    lrn: [{type: "required", message: "Enter Student LRN"}],
     fname: [{type: "required", message: "Enter First Name"}],
     lname: [{type: "required", message: "Enter Last Name"}],
     address: [{type: "required", message: "Enter Address"}],
@@ -84,6 +85,9 @@ export class AddStudentComponent {
 
 
     this.ValidationFormUser = this.formbuilder.group({
+      lrn: new FormControl ('', Validators.compose([
+        Validators.required
+      ])),
       fname: new FormControl ('', Validators.compose([
         Validators.required
       ])),
@@ -223,7 +227,8 @@ onSubmit() {
         address: this.ValidationFormUser.value.address,
         phone: this.ValidationFormUser.value.phone,
         gender: this.ValidationFormUser.value.gender,
-        birthdate: formattedBirthdate
+        birthdate: formattedBirthdate,
+        lrn: this.ValidationFormUser.value.lrn
       };
 
       this.authService.addStudent(studentData).subscribe(
