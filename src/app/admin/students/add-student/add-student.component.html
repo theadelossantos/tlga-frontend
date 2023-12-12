@@ -11,6 +11,8 @@
 </div>
 <form [formGroup]="ValidationFormUser">
   <h3>PERSONAL INFORMATION</h3>
+  <input class="form-control" (input)="capitalizeFirstLetter($event, 'fname')" type="text" name="lrn" placeholder="Learner Reference Number (LRN)">
+
   <div class="fmname">
       <div class="input-container">
         <input class="form-control" (input)="capitalizeFirstLetter($event, 'fname')" type="text" name="fname" placeholder="First Name" formControlName="fname">
