@@ -8,13 +8,13 @@ export const navbarData: INavbarData[] = [
         icon: 'fa-solid fa-home',
         label: 'Dashboard'
     },
-    {
-      routeLink: '/admin-home/queries',
-      icon: 'fa-solid fa-message',
-      label: 'Queries',
-      items: [],
+  //   {
+  //     routeLink: '/admin-home/queries',
+  //     icon: 'fa-solid fa-message',
+  //     label: 'Queries',
+  //     items: [],
 
-  },
+  // },
     {
         routeLink: '/admin-home/teachers',
         icon: 'fa-solid fa-users',
