@@ -31,6 +31,8 @@ export class StElemComponent {
       birthdate: [this.selectedStudent.birthdate],
       section: [this.selectedStudent.section_id],
       department: [this.selectedStudent.dept_id],
+      lrn: [this.selectedStudent.lrn],
+
     });
   }
   form: FormGroup;
@@ -56,6 +58,7 @@ export class StElemComponent {
   section: string = '';
   subject: string = '';
   birthdate: string = '';
+  lrn: string = '';
   originalGradelvl_id: number | null = null;
   selectedGradeLevelArray: number | null = null;
   selectedSectionName: string = '';
@@ -100,6 +103,7 @@ export class StElemComponent {
         department: this.selectedStudent.dept_id,
         grlevel: this.selectedStudent.gradelvl_id,
         section: this.selectedStudent.section_id, 
+        lrn: this.selectedStudent.lrn, 
       });
 
       this.originalGradelvl_id = this.selectedStudent.gradelvl_id;
@@ -159,6 +163,7 @@ toggleSortOrder() {
             gender: this.filteredStudent[0].gender,
             birthdate: this.filteredStudent[0].birthdate,
             dept_id: this.selectedGradeLevel.dept_id,
+            lrn: this.filteredStudent[0].lrn
           };
         }else{
           this.selectedStudent = {
@@ -171,7 +176,8 @@ toggleSortOrder() {
             phone: '',
             gender: '',
             birthdate: '',
-            dept_id: null
+            dept_id: null,
+            lrn: ''
           };
         }
 
@@ -197,7 +203,8 @@ toggleSortOrder() {
             section: this.selectedStudent.section_id,
             gender: this.selectedStudent.gender, 
             department: this.selectedStudent.dept_id,
-            email: this.selectedStudent.user.email
+            email: this.selectedStudent.user.email,
+            lrn: this.selectedStudent.lrn
           });
           
         
@@ -248,7 +255,8 @@ toggleSortOrder() {
         phone: this.form.value.phone,
         gender: this.form.value.gender,
         birthdate: this.form.value.birthdate,
-        gradelvl_id: this.form.value.grlevel
+        gradelvl_id: this.form.value.grlevel,
+        lrn: this.form.value.lrn
       }
       
     };
