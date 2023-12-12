@@ -150,7 +150,7 @@ toggleSortOrder() {
         this.selectedSection = this.sections.find((level) => level.section_id === sectionId);
 
         this.filteredStudent = data.students;
-
+        console.log('filter', this.filteredStudent)
         if (this.filteredStudent.length > 0){
           this.selectedStudent = {
             gradeLevel: this.selectedGradeLevel.gradelvl_id,

@@ -63,6 +63,8 @@
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">LRN</th>
+
         <!-- <th scope="col">Grade Level</th> -->
         <th scope="col">Last Name</th>
         <th scope="col">First Name</th>
@@ -75,6 +77,8 @@
     <tbody *ngIf="filteredStudent.length > 0">
         <tr *ngFor="let student of filteredStudent; let i = index">
             <th scope="row">{{ i + 1 }}</th>
+            <td>{{ student.lrn }}</td>
+
             <!-- <td>{{ selectedGradeLevel?.name }}</td> -->
             <td>{{ student.lname }}</td>
             <td>{{ student.fname }}</td>
@@ -144,6 +148,8 @@
 
             <form [formGroup]="form">
                 <h3>PERSONAL INFORMATION</h3>
+                <input class="form-control mb-2"  type="text" placeholder="Learner Reference Number (LRN)" name="lrn" formControlName="lrn">
+
                 <div class="fmname">
                     <div class="input-container">
                         <input class="form-control" type="text" name="fname" placeholder="First Name" formControlName="studentName">
